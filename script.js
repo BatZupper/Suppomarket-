@@ -1,13 +1,13 @@
 const canvas = document.getElementById('animationCanvas');
 const ctx = canvas.getContext('2d');
-let currentFrame = 0;
-let totalFrames = 275; // Imposta il numero totale di frame disponibili
+let currentFrame = 1;
+let totalFrames = 2300; // Imposta il numero totale di frame disponibili
 let fps = 24; // Frame rate (frame per secondo)
 let isPlaying = false;
 let animationInterval;
 
-var anID;
-var audio;
+var anID = 0;
+const audio = new Audio("sounds/-1.mp3");
 
 function loadFrame(frameNum) {
     const img = new Image();
@@ -21,16 +21,13 @@ function loadFrame(frameNum) {
 function startAnimation() {
     if (isPlaying) return;
     isPlaying = true;
-
-    audio = new Audio("sounds/-1.mp3");
-    audio.play();
+    audio.play()
 
     animationInterval = setInterval(() => {
         loadFrame(currentFrame);
         currentFrame++;
-        if (currentFrame > totalFrames) {
-            currentFrame = currentFrame - 1; // pausati
-            audio.pause();
+        if (anID = 0 && currentFrame > 276) {
+            pauseAnimation();
         }
     }, 1000 / fps);
 }
@@ -61,3 +58,4 @@ document.getElementById('setFrameBtn').addEventListener('click', () => {
     const frameNum = parseInt(document.getElementById('frameInput').value);
     setFrame(frameNum);
 });
+
